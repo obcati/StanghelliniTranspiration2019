@@ -20,7 +20,7 @@ Symbols
     ε     –        Latent-to-sensible heat ratio of saturated air:
                        ε = 0.7156 · exp(0.0533 · Tₐ)
     VPD   g m⁻³   Absolute vapour pressure deficit
-    L     J g⁻¹   Latent heat of vaporisation:  L = 2501 − 2.361·Tₐ
+    L     J g⁻¹   Latent heat of vaporisation:  L = 2450 (constant)
     r_b   s m⁻¹   Leaf boundary-layer resistance (fixed = 200 s m⁻¹)
     r_s   s m⁻¹   Stomatal resistance:
                        r_s = 82·[1 + 6.95·exp(−0.4·I_sun/LAI)]·[1 + 0.023·(Tₐ-20)²]
@@ -79,8 +79,8 @@ def vpd_absolute(T_C: np.ndarray | float,
 
 
 def latent_heat_g(T_C: np.ndarray | float) -> np.ndarray | float:
-    """Latent heat of vaporisation L [J g⁻¹], temperature-dependent."""
-    return 2501.0 - 2.361 * T_C
+    """Latent heat of vaporisation L [J g⁻¹], constant value."""
+    return 2450.0
 
 
 # ─────────────────────────────────────────────────────────────────────────────
