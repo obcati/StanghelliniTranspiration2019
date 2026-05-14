@@ -308,7 +308,7 @@ def plot_timeseries(
     ax.set_ylabel("Transpiration [mm h⁻¹]")
     ax.set_title(
         "Stanghellini et al. (2024) Greenhouse Canopy Transpiration\n"
-        "DOI 10.1163/9789004697041   |   r_b = 200 s m⁻¹"
+        "r_b = 200 s m⁻¹"
     )
     ax.legend(fontsize=8, ncol=len(lai_list))
     ax.grid(True, alpha=0.3)
