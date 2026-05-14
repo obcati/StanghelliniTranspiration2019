@@ -5,9 +5,9 @@ dilopezv@unal.edu.co
 =================================
 Reference
 ---------
-Stanghellini, C. (1987, reprinted 2019).
-    Transpiration of a Greenhouse Crop as Related to Climate and Crop Parameters.
-    Wageningen University. DOI: 10.1163/9789004697041
+Stanghellini, C., van 't Ooster, A., & Heuvelink, E. (2024).
+    Greenhouse horticulture: Technology for optimal crop production (2nd ed.).
+    Brill Nijhoff. https://doi.org/10.1163/9789004697041
 
 Model Description
 -----------------
@@ -47,7 +47,7 @@ M_WATER = 18.016      # Molar mass of water                       [g mol⁻¹]
 R_GAS   = 8.314       # Universal gas constant                    [J mol⁻¹ K⁻¹]
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Model parameters  (Stanghellini 2019, greenhouse tomato)
+# Model parameters  (Stanghellini et al. 2024, greenhouse tomato)
 # ─────────────────────────────────────────────────────────────────────────────
 R_B = 200.0           # Leaf boundary-layer resistance (fixed)    [s m⁻¹]
 
@@ -84,13 +84,13 @@ def latent_heat_g(T_C: np.ndarray | float) -> np.ndarray | float:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Stanghellini (2019) model sub-functions
+# Stanghellini et al. (2024) model sub-functions
 # ─────────────────────────────────────────────────────────────────────────────
 
 def epsilon_ratio(Ta: np.ndarray | float) -> np.ndarray | float:
     """
     ε — ratio of the latent to sensible heat content of saturated air
-    for a 1 °C change in temperature (Stanghellini 2019).
+    for a 1 °C change in temperature (Stanghellini et al. 2024).
 
         ε = 0.7156 · exp(0.0533 · Tₐ)
     """
@@ -100,7 +100,7 @@ def epsilon_ratio(Ta: np.ndarray | float) -> np.ndarray | float:
 def net_radiation(I_sun: np.ndarray | float,
                  LAI: float) -> np.ndarray | float:
     """
-    Net radiation of the crop R_n [W m⁻²] (Stanghellini 2019).
+    Net radiation of the crop R_n [W m⁻²] (Stanghellini et al. 2024).
 
         R_n = 0.86 · (1 + exp(−0.7·LAI)) · I_sun
     """
@@ -111,7 +111,7 @@ def stomatal_resistance(I_sun: np.ndarray | float,
                         Ta:    np.ndarray | float,
                         LAI:   float) -> np.ndarray | float:
     """
-    Stomatal resistance r_s [s m⁻¹] (Stanghellini 2019).
+    Stomatal resistance r_s [s m⁻¹] (Stanghellini et al. 2024).
 
         r_s = 82 · [1 + 6.95·exp(−0.4·I_sun/LAI)] · [1 + 0.023·(Tₐ+20)²]
 
@@ -134,7 +134,7 @@ def stanghellini_transpiration(
     LAI:   float,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
-    Canopy transpiration rate E [g m⁻² s⁻¹] — Stanghellini (2019).
+    Canopy transpiration rate E [g m⁻² s⁻¹] — Stanghellini et al. (2024).
 
         E = 2·LAI / [(1+ε)·r_b + r_s]  ·  [VPD + (ε·r_b / 2·LAI)·(R_n/L)]
 
@@ -241,7 +241,7 @@ def run_model(
     lai_values: list[float] = LAI_VALUES,
 ) -> dict[float, pd.DataFrame]:
     """
-    Apply the Stanghellini (2019) model for each LAI in *lai_values*.
+    Apply the Stanghellini et al. (2024) model for each LAI in *lai_values*.
 
     Returns a dict  {LAI_value: result_DataFrame}  where each DataFrame
     contains the base weather columns plus:
@@ -307,7 +307,7 @@ def plot_timeseries(
                 label=f"LAI = {lai}")
     ax.set_ylabel("Transpiration [mm h⁻¹]")
     ax.set_title(
-        "Stanghellini (2019) Greenhouse Canopy Transpiration\n"
+        "Stanghellini et al. (2024) Greenhouse Canopy Transpiration\n"
         "DOI 10.1163/9789004697041   |   r_b = 200 s m⁻¹"
     )
     ax.legend(fontsize=8, ncol=len(lai_list))
@@ -389,7 +389,7 @@ def plot_daily_totals(
     ax.set_xticks(x)
     ax.set_xticklabels([d.strftime("%d %b") for d in dates], rotation=45, ha="right")
     ax.set_ylabel("Transpiration [mm day⁻¹]")
-    ax.set_title("Daily Total Transpiration by LAI — Stanghellini (2019)")
+    ax.set_title("Daily Total Transpiration by LAI — Stanghellini et al. (2024)")
     ax.legend(fontsize=9)
     ax.grid(True, axis="y", alpha=0.3)
     fig.tight_layout()
@@ -446,7 +446,7 @@ def plot_lai_sensitivity(
     ax.grid(True, alpha=0.3)
 
     fig.suptitle(
-        "Stanghellini (2019) Model — LAI Sensitivity",
+        "Stanghellini et al. (2024) Model — LAI Sensitivity",
         fontsize=11, y=1.02
     )
     fig.tight_layout()
@@ -477,7 +477,7 @@ def main() -> None:
     )
     h_step = dt_min / 60.0
 
-    print(f"Running Stanghellini (2019) model for LAI ∈ {LAI_VALUES} …")
+    print(f"Running Stanghellini et al. (2024) model for LAI ∈ {LAI_VALUES} …")
     results = run_model(df, LAI_VALUES)
 
     # ── Save CSV results (one file per LAI) ───────────────────────────────
