@@ -23,7 +23,7 @@ Symbols
     L     J g⁻¹   Latent heat of vaporisation:  L = 2501 − 2.361·Tₐ
     r_b   s m⁻¹   Leaf boundary-layer resistance (fixed = 200 s m⁻¹)
     r_s   s m⁻¹   Stomatal resistance:
-                       r_s = 82·[1 + 6.95·exp(−0.4·I_sun/LAI)]·[1 + 0.023·(Tₐ+20)²]
+                       r_s = 82·[1 + 6.95·exp(−0.4·I_sun/LAI)]·[1 + 0.023·(Tₐ-20)²]
     R_n   W m⁻²   Net crop radiation:
                        R_n = 0.86·(1 + exp(−0.7·LAI))·I_sun
 
