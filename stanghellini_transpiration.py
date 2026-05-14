@@ -113,7 +113,7 @@ def stomatal_resistance(I_sun: np.ndarray | float,
     """
     Stomatal resistance r_s [s m⁻¹] (Stanghellini et al. 2024).
 
-        r_s = 82 · [1 + 6.95·exp(−0.4·I_sun/LAI)] · [1 + 0.023·(Tₐ+20)²]
+        r_s = 82 · [1 + 6.95·exp(−0.4·I_sun/LAI)] · [1 + 0.023·(Tₐ-20)²]
 
     The first factor accounts for radiation (I_sun/LAI = mean irradiance
     per unit leaf area); the second accounts for temperature.
